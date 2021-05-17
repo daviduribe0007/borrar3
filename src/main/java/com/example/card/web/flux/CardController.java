@@ -34,6 +34,17 @@ public class CardController {
        return cardService.delete(code);
     }
 
+    @PutMapping
+    public Mono<Void> update(@RequestBody Mono<Card> cardMono) {
+        return cardService.update(cardMono);
+    }
+
+
+
+
+
+
+
 
 
 

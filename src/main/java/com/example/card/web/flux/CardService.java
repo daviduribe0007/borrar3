@@ -34,6 +34,11 @@ public class CardService {
         return cardRepository.deleteById(code);
     }
 
+    public Mono<Void> update(Mono<Card> cardMono){
+        return cardMono
+                .flatMap(cardRepository::save).then();
+    }
+
 
 
 
