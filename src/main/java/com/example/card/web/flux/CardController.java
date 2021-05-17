@@ -9,32 +9,16 @@ import reactor.core.publisher.Mono;
 @RequestMapping(value = "/card")
 public class CardController {
 
-
     @Autowired
     private CardService cardService;
 
     @PostMapping
-    public Mono<Void> post(@RequestBody Mono<Card> personMono) {
-        return cardService.insert(personMono);
+    public Mono<Void> save(@RequestBody Mono<Card> cardMonoMono) {
+        return cardService.insert(cardMonoMono);
     }
 
-    @GetMapping("/{code}")
-    public Mono<Card> getPerson(@PathVariable("code") String id) {
-        return Mono.just(new Card());
-    }
 
-    @PutMapping
-    public Mono<Void> update(@RequestBody Mono<Card> personMono) {
-        return Mono.empty();
-    }
 
-    @DeleteMapping("/{code}")
-    public Mono<Void> delete(@PathVariable("code") String id) {
-        return Mono.empty();
-    }
 
-    @GetMapping
-    public Flux<Card> list() {
-        return cardService.listAll();
-    }
+
 }

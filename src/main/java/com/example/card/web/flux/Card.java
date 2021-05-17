@@ -1,33 +1,40 @@
 package com.example.card.web.flux;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Document
 public class Card {
 
+   @NotNull
+   @NotBlank(message = "code can't be empty")
+    @Id
+    private String code;
     @NotNull
     @NotBlank(message = "title can't be empty")
     private String title;
     @NotNull
     @NotBlank(message = "date can't be empty")
-    private LocalDateTime date;
+    private LocalDate date;
     @NotNull
     @NotBlank(message = "number can't be empty")
     private String number;
     @NotNull
     @NotBlank(message = "TypeCard can't be empty")
     private TypeCard type;
-    @Id
-    @NotNull
-    @NotBlank(message = "code can't be empty")
-    private String code;
+
 
     public Card() {
+    }
+
+    public Card(String code, String title, LocalDate date, String number, TypeCard type) {
+        this.code = code;
+        this.title = title;
+        this.date = date;
+        this.number = number;
+        this.type = type;
     }
 
     public String getTitle() {
@@ -38,11 +45,11 @@ public class Card {
         this.title = title;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

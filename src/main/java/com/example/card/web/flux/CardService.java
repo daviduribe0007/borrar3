@@ -9,19 +9,16 @@ import java.util.function.BiFunction;
 
 @Service
 public class CardService {
-    private final BiFunction<CardRepository, Card, Mono<Card>> validateBeforeInsert
-            = (repo, person) -> repo.findBycode(person.getCode());
-    @Autowired
-    private CardRepository repository;
 
-    public Flux<Card> listAll() {
-        return repository.findAll();
+    private static CardRepository cardRepository;
+
+    @Autowired
+    public CardService(CardRepository cardRepository) {
+        this.cardRepository = cardRepository;
     }
 
-    public Mono<Void> insert(Mono<Card> personMono) {
-        return personMono
-                .flatMap(card -> validateBeforeInsert.apply(repository, card))
-                .switchIfEmpty(Mono.defer(() -> personMono.doOnNext(repository::save)))
-                .then();
+    public Mono<Void> insert(Mono<Card> cardMono){
+        return cardMono
+                .flatMap(cardRepository::save).then().log();
     }
 }
