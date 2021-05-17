@@ -56,4 +56,16 @@ class CardControllerTest {
                 .jsonPath("$[0].number").isEqualTo("154565999")
                 .jsonPath("$[0].type").isEqualTo("VISA");
     }
+
+    @Test
+    void delete() {
+        webTestClient.delete()
+                .uri("/card/1")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody().isEmpty();
+    }
+
+
+
 }

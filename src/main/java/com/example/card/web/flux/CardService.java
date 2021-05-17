@@ -23,12 +23,18 @@ public class CardService {
 
     public Mono<Void> insert(Mono<Card> cardMono){
         return cardMono
-                .flatMap(cardRepository::save).then().log();
+                .flatMap(cardRepository::save).then();
     }
 
     public Flux<Card> listByType(String type) {
         return cardRepository.findByType(type);
     }
+
+    public Mono<Void> delete(String code) {
+        return cardRepository.deleteById(code);
+    }
+
+
 
 
 

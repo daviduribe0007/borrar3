@@ -29,6 +29,11 @@ public class CardController {
         return cardService.listByType(type);
     }
 
+    @DeleteMapping(value = "/{code}")
+    public Mono<Void> delete(@PathVariable("code") String code) {
+       return cardService.delete(code);
+    }
+
 
 
 
