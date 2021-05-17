@@ -1,5 +1,6 @@
-package com.example.card.web.flux;
+package com.example.card.web.flux.entities;
 
+import com.example.card.web.flux.valueobjects.TypeCard;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -30,20 +31,6 @@ public class Card {
         this.title = title;
         this.date = date;
         this.number = number;
-        this.type = validateData();
-    }
-
-    private TypeCard validateData() {
-        switch (code) {
-            case "03":
-                return TypeCard.MasterCard;
-            case "06":
-                return TypeCard.VISA;
-            case "12":
-                return TypeCard.PRIME;
-            default:
-                throw new IllegalArgumentException(" The code " + this.code + " are not valid");
-        }
     }
 
     public String getTitle() {

@@ -1,4 +1,4 @@
-package com.example.card.web.flux;
+package com.example.card.web.flux.valueobjects;
 
 public enum TypeCard {
     MasterCard,

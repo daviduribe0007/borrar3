@@ -1,5 +1,7 @@
-package com.example.card.web.flux;
+package com.example.card.web.flux.controller;
 
+import com.example.card.web.flux.entities.Card;
+import com.example.card.web.flux.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ public class CardController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Void> save(@RequestBody Mono<Card> cardMonoMono) {
+    public Mono<Card> save(@RequestBody Mono<Card> cardMonoMono) {
         return cardService.insert(cardMonoMono);
     }
 
@@ -35,7 +37,7 @@ public class CardController {
     }
 
     @PutMapping
-    public Mono<Void> update(@RequestBody Mono<Card> cardMono) {
+    public Mono<Card> update(@RequestBody Mono<Card> cardMono) {
         return cardService.update(cardMono);
     }
 

@@ -1,9 +1,13 @@
-package com.example.card.web.flux;
+package com.example.card.web.flux.services;
 
+import com.example.card.web.flux.entities.Card;
+import com.example.card.web.flux.repositories.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import static com.example.card.web.flux.services.AsignType.generateType;
 
 
 @Service
@@ -20,9 +24,15 @@ public class CardService {
         return cardRepository.findAll();
     }
 
-    public Mono<Void> insert(Mono<Card> cardMono) {
+
+    public Mono<Card> insert(Mono<Card> cardMono) {
+
         return cardMono
-                .flatMap(cardRepository::save).then();
+                .flatMap(card ->{
+                    card.setType( generateType(card.getCode()));
+                        return cardRepository.save(card); });
+
+
     }
 
     public Flux<Card> listByType(String type) {
@@ -33,9 +43,11 @@ public class CardService {
         return cardRepository.deleteById(code);
     }
 
-    public Mono<Void> update(Mono<Card> cardMono) {
+    public Mono<Card> update(Mono<Card> cardMono) {
         return cardMono
-                .flatMap(cardRepository::save).then();
+                .flatMap(card ->{
+                    card.setType( generateType(card.getCode()));
+                    return cardRepository.save(card); });
     }
 
 
