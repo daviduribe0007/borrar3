@@ -6,13 +6,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 @Document
 public class Card {
 
    @NotNull
    @NotBlank(message = "code can't be empty")
-    @Id
     private String code;
     @NotNull
     @NotBlank(message = "title can't be empty")
@@ -21,22 +19,31 @@ public class Card {
     @NotBlank(message = "date can't be empty")
     private LocalDate date;
     @NotNull
+    @Id
     @NotBlank(message = "number can't be empty")
     private String number;
-    @NotNull
-    @NotBlank(message = "TypeCard can't be empty")
     private TypeCard type;
 
 
-    public Card() {
-    }
-
-    public Card(String code, String title, LocalDate date, String number, TypeCard type) {
+    public Card(String code, String title, LocalDate date, String number) {
         this.code = code;
         this.title = title;
         this.date = date;
         this.number = number;
-        this.type = type;
+        this.type = validateData();
+    }
+
+    private TypeCard validateData() {
+        switch(code){
+            case "03":
+                return TypeCard.MasterCard;
+            case "06":
+                return TypeCard.VISA;
+            case "12":
+                return TypeCard.PRIME;
+            default:
+                throw  new IllegalArgumentException(" The code "+ this.code +" are not valid");
+        }
     }
 
     public String getTitle() {
