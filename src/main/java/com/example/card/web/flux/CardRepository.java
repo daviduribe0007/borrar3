@@ -2,11 +2,11 @@ package com.example.card.web.flux;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 @Repository
 public interface CardRepository extends ReactiveMongoRepository<Card, String> {
 
-    Mono<Card> findBycode(String code);
+    Flux<Card> findByType(String type);
 
 }

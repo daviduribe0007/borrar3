@@ -25,4 +25,11 @@ public class CardService {
         return cardMono
                 .flatMap(cardRepository::save).then().log();
     }
+
+    public Flux<Card> listByType(String type) {
+        return cardRepository.findByType(type);
+    }
+
+
+
 }

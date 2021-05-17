@@ -3,7 +3,7 @@ package com.example.card.web.flux;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
+    import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -22,6 +22,11 @@ public class CardController {
     @GetMapping
     public Flux<Card> list() {
         return CardService.listAll();
+    }
+
+    @GetMapping("/{type}")
+    public Flux<Card> getPerson(@PathVariable("type") String type) {
+        return cardService.listByType(type);
     }
 
 
