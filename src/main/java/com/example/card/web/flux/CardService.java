@@ -17,6 +17,10 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
+    public static Flux<Card> listAll() {
+        return cardRepository.findAll();
+    }
+
     public Mono<Void> insert(Mono<Card> cardMono){
         return cardMono
                 .flatMap(cardRepository::save).then().log();

@@ -17,6 +17,10 @@ public class CardController {
         return cardService.insert(cardMonoMono);
     }
 
+    @GetMapping
+    public Flux<Card> list() {
+        return CardService.listAll();
+    }
 
 
 
