@@ -1,27 +1,18 @@
 package com.example.card.web.flux;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.time.LocalDate;
-
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -43,7 +34,7 @@ class CardControllerTest {
     @Test
     void list() {
         var list = Flux.just(
-                new Card("06","Nueva",  LocalDate.of(2020,05,2),"154565999"));
+                new Card("06", "Nueva", LocalDate.of(2020, 05, 2), "154565999"));
         when(repository.findAll()).thenReturn(list);
         webTestClient.get()
                 .uri("/card")
@@ -65,7 +56,4 @@ class CardControllerTest {
                 .expectStatus().isOk()
                 .expectBody().isEmpty();
     }
-
-
-
 }

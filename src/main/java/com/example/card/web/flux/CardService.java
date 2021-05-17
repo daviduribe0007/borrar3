@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.function.BiFunction;
 
 @Service
 public class CardService {
@@ -21,7 +20,7 @@ public class CardService {
         return cardRepository.findAll();
     }
 
-    public Mono<Void> insert(Mono<Card> cardMono){
+    public Mono<Void> insert(Mono<Card> cardMono) {
         return cardMono
                 .flatMap(cardRepository::save).then();
     }
@@ -34,13 +33,10 @@ public class CardService {
         return cardRepository.deleteById(code);
     }
 
-    public Mono<Void> update(Mono<Card> cardMono){
+    public Mono<Void> update(Mono<Card> cardMono) {
         return cardMono
                 .flatMap(cardRepository::save).then();
     }
-
-
-
 
 
 }
