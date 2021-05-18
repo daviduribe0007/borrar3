@@ -33,6 +33,9 @@ public class Card {
         this.number = number;
     }
 
+    public Card() {
+    }
+
     public String getTitle() {
         return title;
     }

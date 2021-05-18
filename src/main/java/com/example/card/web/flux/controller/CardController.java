@@ -27,8 +27,13 @@ public class CardController {
     }
 
     @GetMapping("/{type}")
-    public Flux<Card> getPerson(@PathVariable("type") String type) {
+    public Flux<Card> getCard(@PathVariable("type") String type) {
         return cardService.listByType(type);
+    }
+
+    @GetMapping("/id/{type}")
+    public Mono<Card> getidCard(@PathVariable("type") String type) {
+        return cardService.listById(type);
     }
 
     @DeleteMapping(value = "/{code}")

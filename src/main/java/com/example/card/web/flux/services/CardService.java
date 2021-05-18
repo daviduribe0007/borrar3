@@ -39,6 +39,10 @@ public class CardService {
         return cardRepository.findByType(type);
     }
 
+    public Mono<Card> listById(String type) {
+        return cardRepository.findById(type);
+    }
+
     public Mono<Void> delete(String code) {
         return cardRepository.deleteById(code);
     }
