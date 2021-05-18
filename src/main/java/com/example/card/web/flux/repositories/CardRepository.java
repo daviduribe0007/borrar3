@@ -7,7 +7,5 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface CardRepository extends ReactiveMongoRepository<Card, String> {
-
     Flux<Card> findByType(String type);
-
 }

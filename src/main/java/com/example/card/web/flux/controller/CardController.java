@@ -11,7 +11,6 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping(value = "/card")
 public class CardController {
-
     @Autowired
     private CardService cardService;
 
@@ -45,6 +44,4 @@ public class CardController {
     public Mono<Card> update(@RequestBody Mono<Card> cardMono) {
         return cardService.update(cardMono);
     }
-
-
 }

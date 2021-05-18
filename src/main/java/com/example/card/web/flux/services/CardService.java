@@ -9,10 +9,8 @@ import reactor.core.publisher.Mono;
 
 import static com.example.card.web.flux.services.AsignType.generateType;
 
-
 @Service
 public class CardService {
-
     private static CardRepository cardRepository;
 
     @Autowired
@@ -24,15 +22,12 @@ public class CardService {
         return cardRepository.findAll();
     }
 
-
     public Mono<Card> insert(Mono<Card> cardMono) {
-
         return cardMono
-                .flatMap(card ->{
-                    card.setType( generateType(card.getCode()));
-                        return cardRepository.save(card); });
-
-
+                .flatMap(card -> {
+                    card.setType(generateType(card.getCode()));
+                    return cardRepository.save(card);
+                });
     }
 
     public Flux<Card> listByType(String type) {
@@ -49,10 +44,9 @@ public class CardService {
 
     public Mono<Card> update(Mono<Card> cardMono) {
         return cardMono
-                .flatMap(card ->{
-                    card.setType( generateType(card.getCode()));
-                    return cardRepository.save(card); });
+                .flatMap(card -> {
+                    card.setType(generateType(card.getCode()));
+                    return cardRepository.save(card);
+                });
     }
-
-
 }

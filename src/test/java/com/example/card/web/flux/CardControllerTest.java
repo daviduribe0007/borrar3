@@ -4,15 +4,9 @@ import com.example.card.web.flux.controller.CardController;
 import com.example.card.web.flux.entities.Card;
 import com.example.card.web.flux.repositories.CardRepository;
 import com.example.card.web.flux.services.CardService;
-import com.example.card.web.flux.valueobjects.TypeCard;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-import org.mockito.internal.matchers.Any;
 import org.springframework.http.MediaType;
 import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -32,7 +25,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 @WebFluxTest(controllers = CardController.class)
 class CardControllerTest {
-
     @Autowired
     private WebTestClient webTestClient;
 
@@ -72,7 +64,6 @@ class CardControllerTest {
 
     @Test
     void saveCard() {
-
         var request = Mono.just(new Card(
                 "06",
                 "Nueva",
@@ -92,7 +83,6 @@ class CardControllerTest {
                 .jsonPath("$.date").isEqualTo(request.block().getDate().toString())
                 .jsonPath("$.number").isEqualTo(request.block().getNumber());
     }
-
 
     @Test
     void update() {
@@ -147,6 +137,5 @@ class CardControllerTest {
                 .jsonPath("$.title").isEqualTo(request.block().getTitle())
                 .jsonPath("$.date").isEqualTo(request.block().getDate().toString())
                 .jsonPath("$.number").isEqualTo(request.block().getNumber());
-
     }
 }
